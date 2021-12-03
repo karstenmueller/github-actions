@@ -1,10 +1,12 @@
+# reusable worlflow
 name: terraform lint
 
 on:
-  push:
-    branches:
-      - "!main"
-  pull_request:
+  workflow_call:
+    inputs:
+      path:
+        required: true
+        type: string
 
 jobs:
   validate:
@@ -17,7 +19,7 @@ jobs:
       - name: terraform validate
         uses: dflook/terraform-validate@v1
         with:
-          path: terraform
+          path: ${{ inputs.path }
 
   fmt-check:
     runs-on: ubuntu-latest
@@ -29,4 +31,4 @@ jobs:
       - name: terraform fmt
         uses: dflook/terraform-fmt-check@v1
         with:
-          path: terraform
+          path: ${{ inputs.path }
