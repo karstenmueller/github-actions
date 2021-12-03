@@ -1,1 +1,1 @@
-# terraform-github-actions-composite
+# github-actions
